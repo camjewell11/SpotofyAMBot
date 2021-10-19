@@ -1,5 +1,4 @@
-import os
-import discord
+import discord, os, Spotify
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,5 +20,14 @@ async def on_ready():
 
     members = '\n - '.join([member.name for member in guild.members])
     print(f'Guild Members:\n - {members}')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if "music.apple.com" in message.content:
+        response = Spotify.get
+        await message.channel.send(response)
 
 client.run(TOKEN)

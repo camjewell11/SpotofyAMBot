@@ -14,7 +14,7 @@ client.on('message', msg => {
 bot.on('message', (message) => { //whenever a message is sent
     if (message.content.includes('music.apple.com')) { //if it contains an AM link
         message.delete() //delete the message
-        .then(message.channel.send('Link Deleted:\n**Invite links are not permitted on this server**'))
+        .then(message.channel.send('Apple Music is Whack.'))
     }
 })
 
