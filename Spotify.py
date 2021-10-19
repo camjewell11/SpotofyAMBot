@@ -13,11 +13,12 @@ secret = "8710800d6686483d91b1d475762f7f1c"
 username = '3bgf080jxet2k8roxm2qkibk2'
 scope = 'user-library-read' #check the documentation
 authorization_url = 'https://accounts.spotify.com/authorize'
-token_url = 'https://accounts.spotify.com/api/token'
-redirect_uri ='https://localhost.com/callback/'
+token_url = 'https://accounts.spotify.com/authorize?client_id=client_id_number&response_type=code&redirect_uri=https%3A%2F%2Flocalhost.com%2Fcallback%2F&scope=user-library-read'
+redirect_uri ='https://accounts.spotify.com/authorize?client_id=client_id_number&response_type=code&redirect_uri=https%3A%2F%2Flocalhost.com%2Fcallback%2F&scope=user-library-read'
 
 def getClient():
-    token = util.prompt_for_user_token(username,scope,client_id='client_id_number',client_secret='client_secret',redirect_uri='https://localhost.com/callback/')
+    # token = "BQDZnXnyMHMs0eVrRq6m1-jsx7Zm6qk3NmC-VvqCYQxUHC9-1gGlXP8f7Y41GCcPXbKWu9Pgc0upYQGBWiCjHlpHnzbmxwJYtvdIgSM9Fnq1uRvjNIi0thXEBRGN_qQlopgWIn_u6diQ3L0Z-JljaMTfN77Gv1YuvWqOC68eaHrpkb3O"
+    # token = util.prompt_for_user_token(username,scope,client_id='client_id_number',client_secret='client_secret',redirect_uri='https://localhost.com/callback/')
     client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
@@ -34,13 +35,21 @@ def getClient():
 
     return sp
 
+# used by the spotipy client to find URL from id from track name and artist
 def queryForURL(sp, artist, track):
-    # this would be used by the spotipy client to find track name and artist from id (from URL)
-    trackID = "2shFsQSw0h1abkoK6zFF5w"
-    query = "https://api.spotify.com/v1/tracks/" + trackID
-
     # queries client for URL from artist and track
     q = "artist:" + artist + " track:" + track
     results = sp.search(q=q, type='track', limit=5, market='US')
 
-    return results[0]
+    URL = results["tracks"]["items"][0]["external_urls"]["spotify"]
+
+    return URL
+
+# used by spotipy client to find artist and track from id
+def queryForTrackData(id):
+    result = sp.tracks(id)
+
+    artist = result["album"]["artists"][0]["name"]
+    track  = result["album"]["name"]
+
+    return artist, track
