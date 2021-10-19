@@ -31,5 +31,12 @@ spotify = spotipy.Spotify(auth=token)
 print(token)
 print(spotify)
 
+# this would be used by the spotipy client to find track name and artist from id (from URL)
 trackID = "2shFsQSw0h1abkoK6zFF5w"
 query = "https://api.spotify.com/v1/tracks/" + trackID
+
+# queries client for URL from artist and track
+artist = "shadow cliq"
+track = "aerials"
+q = "artist:" + artist + " track:" + track
+results = sp.search(q=q, type='track', limit=5, market='US')
