@@ -53,3 +53,10 @@ def queryForTrackData(id):
     track  = result["album"]["name"]
 
     return artist, track
+
+def getISRC(id):
+    result = sp.tracks(id)
+
+    isrc = result["tracks"]["items"][0]["external_ids"]["isrc"]
+
+    return isrc
