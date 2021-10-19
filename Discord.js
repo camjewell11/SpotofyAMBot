@@ -11,4 +11,11 @@ client.on('message', msg => {
     }
 });
 
-client.login('OTAwMDk5NDEwODE2NTQ4OTc1.YW8Y5g.tzagKKNhmoesKkHB74F0hlvArKk');
+bot.on('message', (message) => { //whenever a message is sent
+    if (message.content.includes('music.apple.com')) { //if it contains an AM link
+        message.delete() //delete the message
+        .then(message.channel.send('Link Deleted:\n**Invite links are not permitted on this server**'))
+    }
+})
+
+client.login('OTAwMDk5NDEwODE2NTQ4OTc1.YW8Y5g.B3YKYiEvlFUpXLmgfgBlPTld7iN');

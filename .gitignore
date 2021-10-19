@@ -1,2 +1,5 @@
 # python cache files
 *.pyc
+
+# environment vars
+.env

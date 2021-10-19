@@ -1,16 +1,19 @@
 # importing the necessary packages
+import os
+from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy.util as util
 
 sp = spotipy.Spotify()
 
+load_dotenv()
 # setting up authorization
-cid = "2dd8ed6a41da4bc3b8ea4ce4bad4cc00"
-secret = "8710800d6686483d91b1d475762f7f1c"
+cid = os.getenv('SPOTIFY_CID')
+secret = os.getenv('SPOTIFY_SID')
 
 # saving the info you're going to need
-username = '3bgf080jxet2k8roxm2qkibk2'
+username = os.getenv('SPOTIFY_USER')
 scope = 'user-library-read' #check the documentation
 authorization_url = 'https://accounts.spotify.com/authorize'
 token_url = 'https://accounts.spotify.com/authorize?client_id=client_id_number&response_type=code&redirect_uri=https%3A%2F%2Flocalhost.com%2Fcallback%2F&scope=user-library-read'
