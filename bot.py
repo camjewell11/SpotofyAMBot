@@ -10,7 +10,7 @@ cid = "2dd8ed6a41da4bc3b8ea4ce4bad4cc00"
 secret = "8710800d6686483d91b1d475762f7f1c"
 
 # saving the info you're going to need
-username = 'your_account_number'
+username = '3bgf080jxet2k8roxm2qkibk2'
 scope = 'user-library-read' #check the documentation
 authorization_url = 'https://accounts.spotify.com/authorize'
 token_url = 'https://accounts.spotify.com/api/token'
@@ -19,3 +19,17 @@ redirect_uri ='https://localhost.com/callback/'
 token = util.prompt_for_user_token(username,scope,client_id='client_id_number',client_secret='client_secret',redirect_uri='https://localhost.com/callback/')
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+# retrieving you access token
+auth = SpotifyClientCredentials(client_id= cid, client_secret=secret)
+
+# save your token
+token = auth.get_access_token()
+spotify = spotipy.Spotify(auth=token)
+
+# check if everything is in order
+print(token)
+print(spotify)
+
+trackID = "2shFsQSw0h1abkoK6zFF5w"
+query = "https://api.spotify.com/v1/tracks/" + trackID
